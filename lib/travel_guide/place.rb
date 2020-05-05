@@ -17,13 +17,13 @@ class TravelGuide::Place
     html = open(self.place_url).read 
     doc = Nokogiri::HTML.parse(html)
     
-      self.best_time = doc.css(".content-wrap > div:nth-child(2) > div > p").text.gsub(/\s+/, "")
-      self.transport = doc.css(".content-wrap > div:nth-child(3) > div > p").text.gsub(/\s+/, "")
-      self.weather = doc.css(".content-wrap > div:nth-child(4) > div > p").text. gsub(/\s+/, "")
-      self.know_before = doc.css(".content-wrap > div:nth-child(5) > div > p").text.gsub(/\s+/, "")
-      self.language = doc.css(".content-wrap > div:nth-child(6) > div > p").text.gsub(/\s+/, "")
-      self.electric = doc.css(".content-wrap > div:nth-child(7) > div > p").text.gsub(/\s+/, "")
-      self.currency = doc.css(".content-wrap > div:nth-child(8) > div > p").text.gsub(/\s+/, "")
+      self.best_time = doc.css(".content-wrap > div:nth-child(2) > div > p").text.strip
+      self.transport = doc.css(".content-wrap > div:nth-child(3) > div > p").text.strip
+      self.weather = doc.css(".content-wrap > div:nth-child(4) > div > p").text.strip
+      self.know_before = doc.css(".content-wrap > div:nth-child(5) > div > p").text.strip
+      self.language = doc.css(".content-wrap > div:nth-child(6) > div > p").text.strip
+      self.electric = doc.css(".content-wrap > div:nth-child(7) > div > p").text.strip
+      self.currency = doc.css(".content-wrap > div:nth-child(8) > div > p").text.strip
       
       puts
       puts "#{self.name} - #{self.country}"

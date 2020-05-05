@@ -6,9 +6,9 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tanattha"]
   spec.email         = ["tanattha.thuenim@gmail.com"]
 
-  spec.summary       = ""
-  spec.description   = ""
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = "Travel Guide"
+  spec.description   = "Guide places that you want to check out"
+  spec.homepage      = "https://github.com/Tanattha/travel-guide-cli"
   #spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
   #spec.metadata["homepage_uri"] = spec.homepage
   #spec.metadata["source_code_uri"] = "TODO: Put your gem's public repo URL here."
@@ -36,4 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "open-uri"
+  spec.add_development_dependency "colorize"
+  
 end

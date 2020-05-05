@@ -31,10 +31,10 @@ class TravelGuide::Scraper
     page.css(".content-wrap > ul > li").each do |list_place|
       place = TravelGuide::Place.new 
      
-      name = list_place.css("div > a > div > span.grid__item__title").text.gsub(/\s+/, "")
+      name = list_place.css("div > a > div > span.grid__item__title").text
       place.name = name 
 
-      country = list_place.css("div > a > div > span.grid__item__cat").text.gsub(/\s+/, "")
+      country = list_place.css("div > a > div > span.grid__item__cat").text
       place.country = country 
 
       if name != "" && name != " " && name != nil

@@ -2,7 +2,9 @@ class TravelGuide::CLI
 
   def call
        TravelGuide::Scraper.new.scrape_places
+       puts "#{File.open("pics/welcome.txt").read}\n\n".red
        puts "Welcome! Where would you like to check out?"
+      
         list_places
         goodbye
         show_place(input)
@@ -10,14 +12,15 @@ class TravelGuide::CLI
 
   def list_places
       
-      puts "Please Select Options: 1:Show List  2:Sort  3.Exit"
+      puts "Please Select Options: 1:Show List  2:Sort  Type q:Exit"
       input = gets.strip
 
     if input == "1"
+      puts
       show_list
     elsif input == "2"
       sort_list
-    elsif input == "3"
+    elsif input == "q" || input == "Q"
       goodbye
     else
       "Sorry, I don't understand."
@@ -33,20 +36,32 @@ class TravelGuide::CLI
       if input == "1"
         sort_by_place_name
       elsif input == "2"
-        sort_by_country
+        sort_by_country_name
       else
         error
       end
   end
 
   def sort_by_place_name
+    puts "======SORT BY PLACE NAME======"
     sorted_name = TravelGuide::Place.all.sort {|a,b| a.name <=> b.name} 
     sorted_name.each_with_index do |sorted , i|
       puts "#{i+1}. #{sorted.name} - #{sorted.country}"
     end
+    menu
+  end
+
+  def sort_by_country_name
+    puts "======SORT BY COUNTRY NAME======"
+    sorted_name = TravelGuide::Place.all.sort {|a,b| a.country <=> b.country} 
+    sorted_name.each_with_index do |sorted , i|
+      puts "#{i+1}. #{sorted.name} - #{sorted.country}"
+    end
+    menu
   end
   
   def show_list
+    puts "==========MAIN LIST=========="
       TravelGuide::Place.all.each_with_index do |place, i|
         puts "#{i+1}. #{place.name} - #{place.country}"
       end
@@ -58,7 +73,8 @@ class TravelGuide::CLI
     input = nil 
   
     while input != "exit"
-      puts "Type the number of a place you want to check out or type q for Exit:"
+      puts
+      puts "Type the number of a place you want to check out, Type s: Back to the Sort Menu, Type q: Exit"
       puts
 
       input = gets.strip
@@ -68,17 +84,20 @@ class TravelGuide::CLI
         place = TravelGuide::Place.all[input.to_i-1]
         puts place.scrape_details
         puts
-        puts "Type m: Back to the Main Menu or type q: Exit"
+        puts "Type m: Back to the Main Menu, Type q: Exit"
         input = gets.strip
           if input == "m" || input == "M"
             list_places
+          elsif input == "s" || input == "S"
+            sort_list
           elsif input == "q" || input == "Q"
             goodbye 
           else
             error
             show_list
           end
-        
+      elsif input == "s" || input == "S"
+        sort_list 
       elsif input == "q" || input == "Q"
         goodbye 
       else
@@ -103,6 +122,8 @@ class TravelGuide::CLI
 
   def goodbye
     puts "See you next time!"
+    sleep 1
+    system("clear")
     exit
   end 
 
