@@ -48,7 +48,6 @@ class TravelGuide::CLI
   
   def show_list
       TravelGuide::Place.all.each_with_index do |place, i|
-        #binding.pry
         puts "#{i+1}. #{place.name} - #{place.country}"
       end
     puts
