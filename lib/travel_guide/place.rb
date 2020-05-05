@@ -25,34 +25,31 @@ class TravelGuide::Place
       self.electric = doc.css(".content-wrap > div:nth-child(7) > div > p").text.strip
       self.currency = doc.css(".content-wrap > div:nth-child(8) > div > p").text.strip
       
+      puts "===================================================".center(100, ' ')
+      puts "#{self.name} - #{self.country}".center(100, ' ').blue
+      puts "===================================================".center(100, ' ')
       puts
-      puts "#{self.name} - #{self.country}"
-      puts
-      puts "=======Best Time To Go========"
+      puts "======================BEST TIME TO GO==============".blue
       puts "#{self.best_time}"
       puts
-      puts "=======Trabsportation========="
+      puts "======================TRANSPORTATION===============".blue
       puts "#{self.transport}"
       puts
-      puts "============Weather==========="
+      puts "======================WEATHER======================".blue
       puts "#{self.weather}"
       puts
-      puts "======Know Before You Go======"
+      puts "======================KNOW BEFORE VISITING========= ".blue
       puts "#{self.know_before}"
       puts
-      puts "===========Language==========="
+      puts "======================LANGUAGE=====================".blue
       puts "#{self.language}"
       puts
-      puts "===========Electric==========="
+      puts "======================ELECTRIC=====================".blue
       puts "#{self.electric}"
       puts
-      puts "===========Currency==========="
+      puts "======================CURRENCY=====================".blue
       puts "#{self.currency}"
       
-  end
-
-  def sort_by_country
-   puts self.all.sort_by { |a,b| a.country <=> b.country}
   end
 
   def save
