@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Travel Guide"
   spec.description   = "Guide places that you want to check out"
-  spec.homepage      = "https://github.com/Tanattha/travel-guide-cli"
+  spec.homepage      = ""
   spec.license       = "MIT"
   spec.files         = ["lib/travel_guide.rb", "lib/travel_guide/cli.rb", "lib/travel_guide/scraper.rb", "lib/travel_guide/places.rb", "config/environment.rb"]
   spec.executables << 'travel_guide'
