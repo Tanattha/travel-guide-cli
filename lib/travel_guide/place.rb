@@ -5,6 +5,8 @@ require 'open-uri'
 class TravelGuide::Place
 
   attr_accessor  :name, :country, :best_time, :transport, :weather, :know_before, :language, :electric, :currency, :place_url
+  FONT_STYLE = Artii::Base.new :font => 'slant'
+#
 
   @@all = []
  
@@ -25,9 +27,7 @@ class TravelGuide::Place
       self.electric = doc.css(".content-wrap > div:nth-child(7) > div > p").text.strip
       self.currency = doc.css(".content-wrap > div:nth-child(8) > div > p").text.strip
       
-      puts "===================================================".center(100, ' ')
-      puts "#{self.name} - #{self.country}".center(100, ' ').blue
-      puts "===================================================".center(100, ' ')
+      puts "#{FONT_STYLE.asciify(self.name)}\n #{FONT_STYLE.asciify(self.country)}".blue
       puts
       puts "======================BEST TIME TO GO==============".blue
       puts "#{self.best_time}"

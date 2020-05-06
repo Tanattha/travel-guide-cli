@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "open-uri"
   spec.add_development_dependency "colorize"
-  spec.add_development_dependency "io/console"
+  spec.add_development_dependency 'artii', '~> 2.1', '>= 2.1.2'
 
   
 end

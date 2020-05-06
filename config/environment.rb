@@ -2,7 +2,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'colorize'
-require 'io/console'
+require 'artii'
 
 require_relative '../lib/travel_guide/scraper'
 require_relative '../lib/travel_guide/place'
