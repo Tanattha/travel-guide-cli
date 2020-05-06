@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["tanattha.thuenim@gmail.com"]
 
   spec.summary       = "Travel Guide"
-  spec.description   = "Guide places that you want to check out"
+  spec.description   = "Travel Guide"
   spec.homepage      = "https://github.com/Tanattha/travel-guide-cli"
   spec.license       = "MIT"
   spec.files         = ["lib/travel_guide.rb", "lib/travel_guide/cli.rb", "lib/travel_guide/scraper.rb", "lib/travel_guide/places.rb", "config/environment.rb"]
