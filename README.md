@@ -1,8 +1,8 @@
-# Travel Guide GEM
+# Travel Guide - CLI Project
 
-Welcome to the TRAVEL GUIDE GEM! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem.
+Welcome to the TRAVEL GUIDE gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem.
 
-This gem is responsibile for scraping the travel guide for many places Travelandleisure.com, Run `bin/travel_guide` for an interactive propmt.
+This gem is responsibile for scraping the travel guide from many places from Travelandleisure.com.
 
 ## Installation
 
@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Run `bin/travel_guide` for an interactive propmt.
 
 ## Development
 
