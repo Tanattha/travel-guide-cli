@@ -2,7 +2,7 @@
 
 Welcome to the TRAVEL GUIDE gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem.
 
-This gem is responsibile for scraping the travel guide from many places from Travelandleisure.com.
+This gem is responsibile for scraping the travel guide from Travelandleisure.com.
 
 ## Installation
 
