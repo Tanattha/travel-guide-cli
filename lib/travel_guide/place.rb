@@ -27,7 +27,7 @@ class TravelGuide::Place
       self.electric = doc.css(".content-wrap > div:nth-child(7) > div > p").text.strip
       self.currency = doc.css(".content-wrap > div:nth-child(8) > div > p").text.strip
       
-      puts "#{FONT_STYLE.asciify(self.name)}\n #{FONT_STYLE.asciify(self.country)}".blue
+      puts "#{FONT_STYLE.asciify(self.name)}\n #{FONT_STYLE.asciify(self.country)}".magenta
       puts
       puts "======================BEST TIME TO GO==============".blue
       puts "#{self.best_time}"

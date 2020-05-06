@@ -88,7 +88,7 @@ class TravelGuide::CLI
   
     while input != "exit"
       puts
-      puts "Type the number of a place you want to check out, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
+      puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
       puts
 
       input = gets.strip
