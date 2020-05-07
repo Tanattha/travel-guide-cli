@@ -1,19 +1,25 @@
 class TravelGuide::CLI 
+  attr_accessor :sorted_name
+  
+  @@sorted_name = []
+ 
+  def self.all
+    @@sorted_name
+  end
 
   def call
        TravelGuide::Scraper.new.scrape_places
-       
        puts "#{File.open("pics/welcome.txt").read}\n".red.center(100, ' ')
        puts "======================TRAVEL GUIDE=====================".center(100, ' ').blue
        puts
-       puts "Welcome To Travel Guide! Where would you like to go?\n".center(100, ' ')
-       
-        list_places
+       puts "Welcome To Travel Guide! Where would you like to go?\n".center(100, ' ').yellow
+        main_menu
         goodbye
-        show_place(input)
+        options_menu
+        
   end
 
-  def list_places
+  def main_menu
       puts "=======================================================".center(100, ' ').blue
       puts "Please Select Options: 1:Show List  2:Sort  Type q:Exit".center(100, ' ')
       puts "=======================================================".center(100, ' ').blue
@@ -28,7 +34,7 @@ class TravelGuide::CLI
       goodbye
     else
       "Sorry, I don't understand.".center(100, ' ')
-      list_places
+      main_menu
     end 
   end
 
@@ -48,78 +54,101 @@ class TravelGuide::CLI
       end
   end
 
-  def sort_by_place_name
-    puts "======================SORT BY PLACE NAME=====================".center(100, ' ').blue
+  def show_list
     puts
-    sorted_name = TravelGuide::Place.all.sort {|a,b| a.name <=> b.name} 
-    sorted_name.each_with_index do |sorted , i|
-      puts "#{i+1}. #{sorted.name} - #{sorted.country}".center(100, ' ')
-      puts
+    puts "======================MAIN LIST(A-Z)=====================".center(100, ' ').blue
+    puts
+    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+      TravelGuide::Place.all.each_with_index do |place, i|
+        table << ["#{i+1}", "#{place.name}", "#{place.country}"]
+      end
     end
-    menu
+    
+    input = nil
+    puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
+    input = gets.strip
+      if input == "s" || input == "S"
+      sort_list
+      elsif input == "q" || input == "Q"
+      goodbye
+      elsif
+        if input_valid?(input)
+          input.to_i <= TravelGuide::Place.all.size
+          place = TravelGuide::Place.all[input.to_i-1]
+          puts place.scrape_details
+          puts
+        end
+      end
+    options_menu
+  end
+
+  def sort_by_place_name
+    puts "======================SEARCH BY PLACE NAME=====================".center(100, ' ').blue
+    puts
+    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+      @@sorted_name = TravelGuide::Place.all.sort {|a,b| a.name <=> b.name} 
+      @@sorted_name.each_with_index do |sorted , i|
+        table << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
+      end
+    end
+
+    input = nil
+    puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
+    input = gets.strip
+      if input == "s" || input == "S"
+        sort_list
+      elsif input == "q" || input == "Q"
+        goodbye
+      elsif
+        if input_valid?(input)
+          place = @@sorted_name[input.to_i-1]
+          puts place.scrape_details
+        end
+      end
+    options_menu
   end
 
   def sort_by_country_name
-    puts "======================SORT BY COUNTRY NAME=====================".center(100, ' ').blue
+    puts "======================SEARCH BY COUNTRY NAME=====================".center(100, ' ').blue
     puts
-    sorted_name = TravelGuide::Place.all.sort {|a,b| a.country <=> b.country} 
-    sorted_name.each_with_index do |sorted , i|
-      puts "#{i+1}. #{sorted.name} - #{sorted.country}".center(100, ' ')
-      puts
-    end
-    menu
-  end
-  
-  def show_list
-    puts "========================MAIN LIST=======================".center(100, ' ').blue
-    sorted_name = TravelGuide::Place.all.sort {|a,b| a.country <=> b.country} 
-      TravelGuide::Place.all.each_with_index do |place, i|
-        puts
-        puts "#{i+1}. #{place.name} - #{place.country}".center(100, ' ')
-        puts
+    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+      @@sorted_name = TravelGuide::Place.all.sort {|a,b| a.country <=> b.country} 
+      @@sorted_name.each_with_index do |sorted , i|
+        table << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
       end
-    puts
-    menu
-  end
-  
-  def menu 
-    input = nil 
-  
-    while input != "exit"
-      puts
-      puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
-      puts
+    end
 
-      input = gets.strip
-      
-      if input_valid?(input)
-        input.to_i <= TravelGuide::Place.all.size
-        place = TravelGuide::Place.all[input.to_i-1]
-        puts place.scrape_details
-        puts
-        puts "Type m: Back to the Main Menu, Type q: Exit".center(100, ' ').yellow
-        input = gets.strip
-          if input == "m" || input == "M"
-            list_places
-          elsif input == "s" || input == "S"
-            sort_list
-          elsif input == "q" || input == "Q"
-            goodbye 
-          else
-            error
-            show_list
-          end
+    input = nil
+    puts
+    puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
+    input = gets.strip
+      if input == "s" || input == "S"
+        sort_list
+      elsif input == "q" || input == "Q"
+        goodbye
+      elsif
+        if input_valid?(input)
+          place = @@sorted_name[input.to_i-1]
+          puts place.scrape_details
+        end
+      end
+    options_menu
+  end
+
+  def options_menu
+    puts "Type m: Back to the Main Menu, Type s: Back to the Sort Menu Type q: Exit".center(100, ' ').yellow
+    input = gets.strip
+      if input == "m" || input == "M"
+        main_menu
       elsif input == "s" || input == "S"
-        sort_list 
+        sort_list
       elsif input == "q" || input == "Q"
         goodbye 
       else
         error
-        show_list
+        main_menu
       end
-    end
   end
-
 
   def input_valid?(input)
     if input.to_i >= TravelGuide::Place.all.size || input.to_i <= 0
@@ -130,7 +159,7 @@ class TravelGuide::CLI
   end
 
   def error
-    puts "Sorry, I don't understand. Please type again.".center(100, ' ').yellow
+    puts "Sorry, I don't understand.".center(100, ' ').yellow
   end
 
   def goodbye

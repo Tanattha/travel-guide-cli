@@ -3,6 +3,8 @@ require 'nokogiri'
 require 'open-uri'
 require 'colorize'
 require 'artii'
+require 'console_table'
+require 'text'
 
 require_relative '../lib/travel_guide/scraper'
 require_relative '../lib/travel_guide/place'

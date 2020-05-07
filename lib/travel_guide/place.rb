@@ -1,7 +1,3 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
-
 class TravelGuide::Place
 
   attr_accessor  :name, :country, :best_time, :transport, :weather, :know_before, :language, :electric, :currency, :place_url
@@ -9,6 +5,7 @@ class TravelGuide::Place
 
 
   @@all = []
+ 
  
 
   def self.all
