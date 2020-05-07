@@ -8,7 +8,6 @@ class TravelGuide::CLI
        puts
        puts "Welcome To Travel Guide! Where would you like to go?\n".center(100, ' ')
        
-
         list_places
         goodbye
         show_place(input)
