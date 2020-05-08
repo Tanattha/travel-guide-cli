@@ -58,11 +58,15 @@ class TravelGuide::CLI
     puts
     puts "======================MAIN LIST(A-Z)=====================".center(100, ' ').blue
     puts
-    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+    table = Terminal::Table.new :headings => ['Number', 'Name','Country'], :style => {:width => 100} do |t|
       TravelGuide::Place.all.each_with_index do |place, i|
-        table << ["#{i+1}", "#{place.name}", "#{place.country}"]
-      end
+      t << ["#{i+1}","#{place.name}","#{place.country}"]
+      t << :separator
     end
+    puts t
+  end
+
+    
     
     input = nil
     puts "Type the number of a place you would like to go, Type s: Back to the Sort Menu, Type q: Exit".center(100, ' ').yellow
@@ -83,13 +87,15 @@ class TravelGuide::CLI
   end
 
   def sort_by_place_name
-    puts "======================SEARCH BY PLACE NAME=====================".center(100, ' ').blue
+    puts "======================SORT BY PLACE NAME=====================".center(100, ' ').blue
     puts
-    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+    table = Terminal::Table.new :headings => ['Number', 'Name','Country'], :style => {:width => 100} do |t|
       @@sorted_name = TravelGuide::Place.all.sort {|a,b| a.name <=> b.name} 
       @@sorted_name.each_with_index do |sorted , i|
-        table << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
+        t << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
+        t << :separator
       end
+      puts t
     end
 
     input = nil
@@ -109,13 +115,15 @@ class TravelGuide::CLI
   end
 
   def sort_by_country_name
-    puts "======================SEARCH BY COUNTRY NAME=====================".center(100, ' ').blue
+    puts "======================SORT BY COUNTRY NAME=====================".center(100, ' ').blue
     puts
-    ConsoleTable.define(["NUMBER", "PLACE", "COUNTRY"]) do |table|
+    table = Terminal::Table.new :headings => ['Number', 'Name','Country'], :style => {:width => 100} do |t|
       @@sorted_name = TravelGuide::Place.all.sort {|a,b| a.country <=> b.country} 
       @@sorted_name.each_with_index do |sorted , i|
-        table << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
+        t << ["#{i+1}", "#{sorted.name}", "#{sorted.country}"]
+        t << :separator
       end
+      puts t
     end
 
     input = nil
@@ -160,6 +168,7 @@ class TravelGuide::CLI
 
   def error
     puts "Sorry, I don't understand.".center(100, ' ').yellow
+    main_menu
   end
 
   def goodbye
