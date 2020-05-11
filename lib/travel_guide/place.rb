@@ -1,7 +1,6 @@
 class TravelGuide::Place
 
   attr_accessor  :name, :country, :best_time, :transport, :weather, :know_before, :language, :electric, :currency, :place_url
-  FONT_STYLE = Artii::Base.new :font => 'slant'
 
   @@all = []
  
