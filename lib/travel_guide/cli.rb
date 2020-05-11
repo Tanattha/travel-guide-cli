@@ -1,10 +1,4 @@
 class TravelGuide::CLI 
-  
-  @@sorted_name = []
- 
-  def self.all
-    @@sorted_name
-  end
 
   def call
     TravelGuide::Scraper.new.scrape_places
