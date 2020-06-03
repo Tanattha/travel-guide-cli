@@ -23,6 +23,10 @@ Or install it yourself as:
 Run `bin/travel_guide` for an interactive propmt.
 Follow this video guide which demonstrates how to use this gem. 
 
+## Video Walkthrough
+
+Click here for video walkthrough: https://youtu.be/CpksRNlD1lE
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
